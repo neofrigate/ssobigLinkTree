@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+}
+.icon {
+  align-self: stretch;
+  position: relative;
+  border-radius: 2000px;
+  max-width: 100%;
+  overflow: hidden;
+  height: 67px;
+  width: 67px;
+  flex-shrink: 0;
+  padding: 15px;
+  background-color:black;
+}
+.ssobig {
+  align-self: stretch;
+  position: relative;
+  line-height: 130%;
+}
+.b {
+  align-self: stretch;
+  position: relative;
+  font-size: 16px;
+  line-height: 130%;
+}
+.ssobig-parent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+}
+.parent {
+  width: 98px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.httpsaboutssobigcom {
+  align-self: stretch;
+  position: relative;
+  font-size: 14px;
+  line-height: 130%;
+  color: #ccc;
+}
+.div1 {
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 20px;
+  gap: 4px;
+  text-decoration: none;
+  color: #FFF;
+}
+.httpsaboutssobigcom1 {
+  align-self: stretch;
+  position: relative;
+  font-size: 14px;
+  line-height: 130%;
+  color: #333;
+  text-decoration: none;
+}
+.div2 {
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 20px;
+  gap: 4px;
+  text-decoration: none;
+  color: #111;
+}
+.icon1 {
+  width: 19px;
+  position: relative;
+  height: 18px;
+}
+.love-buddies {
+  position: relative;
+  line-height: 130%;
+}
+.variant3 {
+  align-self: stretch;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8px 20px;
+  gap: 8px;
+  text-decoration: none;
+  color: #FFF;
+}
+.variant3-parent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 12px 0px;
+  font-size: 14px;
+}
+.group {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  color: #f7f7f7;
+}
+.frame-parent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 450px;
+}
+.div {
+  width: 100%;
+  position: relative;
+  height: 1024px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  font-family: Pretendard;
+}
+
+.background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("linktree.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  filter: brightness(50%);
+  z-index: -1; /* Position background behind content */
+}
