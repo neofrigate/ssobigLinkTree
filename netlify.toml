@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "https://ssobig.com/*"
-  to = "https://www.ssobig.com/:splat"
-  status = 200
-  force = true
