@@ -1,20 +1,29 @@
 body {
-  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 .top_gap {
   height: 8vh;
 }
 .icon {
-  align-self: stretch;
-  position: relative;
-  border-radius: 2000px;
-  max-width: 100%;
-  overflow: hidden;
-  height: 67px;
-  width: 67px;
-  flex-shrink: 0;
-  padding: 15px;
+  display: block;
+  border-radius: 50%; /* 완전한 원 형태 */
+  width: 100px; /* 원의 크기를 키움 */
+  height: 100px;
+  box-sizing: border-box;
   background-color: black;
+  margin: 0 auto; /* 수평 중앙 정렬 */
+  overflow: hidden; /* 원 밖의 내용 잘림 */
+  position: relative;
+}
+.icon img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%; /* 로고 크기를 원 크기 기준으로 조정 */
+  height: 80%;
+  transform: translate(-50%, -50%); /* 로고를 원 중심에 위치 */
+  object-fit: contain; /* 원 내부에 로고가 비율을 유지하며 들어감 */
 }
 .ssobig {
   align-self: stretch;
@@ -36,12 +45,12 @@ body {
   gap: 4px;
 }
 .parent {
-  width: 98px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
+  justify-content: center;
+  gap: 16px; /* 로고와 텍스트 사이의 간격 조정 */
+  text-align: center;
 }
 .httpsaboutssobigcom {
   align-self: stretch;
