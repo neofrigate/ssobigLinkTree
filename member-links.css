@@ -1,0 +1,291 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("./fonts/Pretendard-Regular.woff2") format("woff2"),
+    url("./fonts/Pretendard-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("./fonts/Pretendard-Bold.woff2") format("woff2"),
+    url("./fonts/Pretendard-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #111111;
+  --panel: #1a1a1a;
+  --panel-hover: #202020;
+  --panel-border: rgba(255, 255, 255, 0.14);
+  --text-main: #f3f3f3;
+  --text-sub: rgba(243, 243, 243, 0.62);
+  --text-muted: rgba(243, 243, 243, 0.4);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #171717 0%, var(--bg) 100%);
+  color: var(--text-main);
+}
+
+a,
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.page {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.topbar__back,
+.topbar__logout,
+.auth-button {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-main);
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.topbar__back:hover,
+.topbar__logout:hover,
+.auth-button:hover,
+.topbar__back:focus-visible,
+.topbar__logout:focus-visible,
+.auth-button:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.34);
+  outline: none;
+}
+
+.topbar__title {
+  font-size: 15px;
+  color: var(--text-sub);
+}
+
+.hero {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.1;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+.user-email {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.login-screen,
+.access-denied {
+  display: none;
+  min-height: calc(100vh - 56px);
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card,
+.access-card {
+  width: min(100%, 460px);
+  padding: 28px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.login-card h2,
+.access-card h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.login-card p,
+.access-card p {
+  margin: 0 0 22px;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+.main-content {
+  display: none;
+}
+
+.project-list {
+  display: grid;
+  gap: 12px;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.project-card:hover {
+  background: var(--panel-hover);
+}
+
+.project-card__meta {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.project-card__code {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.project-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.project-card__info {
+  display: grid;
+  gap: 6px;
+}
+
+.project-card__line {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.project-card__label {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.project-card__value {
+  min-width: 0;
+  color: var(--text-sub);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.project-card__actions {
+  display: grid;
+  gap: 10px;
+  align-content: center;
+}
+
+.project-card__link {
+  min-width: 92px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.project-card__link:hover,
+.project-card__link:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.34);
+  outline: none;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 20px 16px 32px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-card__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card,
+  .access-card {
+    padding: 22px;
+  }
+
+  .project-card__line {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+}

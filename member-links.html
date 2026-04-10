@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSOBIG Member Links</title>
+    <link rel="stylesheet" href="./member-links.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./auth.js" defer></script>
+    <script defer>
+      const PROJECTS = [
+        {
+          code: "s3",
+          title: "쏘빅 홈페이지",
+          repo: "https://github.com/neofrigate/ssobig-home",
+          service: "https://www.ssobig.com/",
+        },
+        {
+          code: "s4",
+          title: "쏘빅 데이터 스크래핑",
+          repo: "https://github.com/neofrigate/ssobig-marketing",
+          service: "https://relay.ssobig.com/",
+        },
+        {
+          code: "s5",
+          title: "쏘빅 오프라인 관리",
+          repo: "https://github.com/neofrigate/ssobig_appscript",
+          service: "https://manage.ssobig.com/",
+        },
+        {
+          code: "s6",
+          title: "쏘빅 스토리 관리",
+          repo: "https://github.com/soopeach22/ssobig-story",
+          service: "https://manage-story.ssobig.com/",
+        },
+        {
+          code: "s10",
+          title: "쏘빅 파이낸스",
+          repo: "https://github.com/neofrigate/ssobig-finance",
+          service: "https://finance.ssobig.com/",
+        },
+      ];
+
+      function renderProjects() {
+        const list = document.getElementById("projectList");
+        list.innerHTML = PROJECTS.map(
+          (project) => `
+            <article class="project-card">
+              <div class="project-card__meta">
+                <div class="project-card__code">${project.code}</div>
+                <div class="project-card__title">${project.title}</div>
+                <div class="project-card__info">
+                  <div class="project-card__line">
+                    <span class="project-card__label">GitHub</span>
+                    <span class="project-card__value">${project.repo}</span>
+                  </div>
+                  <div class="project-card__line">
+                    <span class="project-card__label">Service</span>
+                    <span class="project-card__value">${project.service}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-card__actions">
+                <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="project-card__link" href="${project.service}" target="_blank" rel="noreferrer">Open</a>
+              </div>
+            </article>
+          `
+        ).join("");
+      }
+
+      function showLogin() {
+        document.getElementById("loginScreen").style.display = "flex";
+        document.getElementById("accessDenied").style.display = "none";
+        document.getElementById("mainContent").style.display = "none";
+      }
+
+      function showDenied() {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("accessDenied").style.display = "flex";
+        document.getElementById("mainContent").style.display = "none";
+      }
+
+      function showMain(user) {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("accessDenied").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("userEmail").textContent = user.email || "";
+      }
+
+      async function syncAccess(session) {
+        const user = session?.user || (await window.SsobigAuth.getUser());
+
+        if (!user) {
+          showLogin();
+          return;
+        }
+
+        if (!window.SsobigAuth.isSsobigEmail(user.email)) {
+          showDenied();
+          setTimeout(() => {
+            window.SsobigAuth.signOut();
+          }, 1600);
+          return;
+        }
+
+        showMain(user);
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        renderProjects();
+
+        await window.SsobigAuth.waitForSession();
+        await syncAccess(await window.SsobigAuth.getSession());
+
+        window.SsobigAuth.onAuthStateChange(async (_event, session) => {
+          await syncAccess(session);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <a class="topbar__back" href="./index.html">메인으로 돌아가기</a>
+        <div class="topbar__title">SSOBIG Members Only</div>
+      </div>
+
+      <div id="loginScreen" class="login-screen">
+        <section class="login-card">
+          <h2>쏘빅멤버용 링크</h2>
+          <p>@ssobig.com Google 계정으로 로그인한 멤버만 볼 수 있습니다.</p>
+          <button class="auth-button" onclick="window.SsobigAuth.signIn()">Google로 로그인</button>
+        </section>
+      </div>
+
+      <div id="accessDenied" class="access-denied">
+        <section class="access-card">
+          <h2>접근할 수 없습니다</h2>
+          <p>@ssobig.com 계정만 접근할 수 있습니다. 잠시 후 자동으로 로그아웃됩니다.</p>
+        </section>
+      </div>
+
+      <main id="mainContent" class="main-content">
+        <section class="hero">
+          <h1>쏘빅멤버용 링크</h1>
+          <p>내부 운영용 프로젝트와 관리 페이지를 한 곳에서 확인할 수 있습니다.</p>
+        </section>
+
+        <div class="status-row">
+          <div>로그인 계정: <span id="userEmail" class="user-email"></span></div>
+          <button class="topbar__logout" onclick="window.SsobigAuth.signOut()">로그아웃</button>
+        </div>
+
+        <section id="projectList" class="project-list" aria-label="멤버 전용 프로젝트 링크"></section>
+      </main>
+    </div>
+  </body>
+</html>
