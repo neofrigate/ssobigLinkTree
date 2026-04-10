@@ -3,13 +3,25 @@ const SUPABASE_ANON_KEY = "sb_publishable_AdEHgXPGJ2gKGVAjb7RYSg_YzUuT6jB";
 
 const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function getRedirectTo() {
+  const url = new URL(window.location.href);
+  const isLocalHost =
+    url.hostname === "localhost" || url.hostname === "127.0.0.1";
+
+  if (isLocalHost) {
+    return `${url.origin}${url.pathname}`;
+  }
+
+  return `https://${url.host}${url.pathname}`;
+}
+
 window.SsobigAuth = {
   async signIn() {
     const { error } = await _supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         queryParams: { hd: "ssobig.com" },
-        redirectTo: window.location.origin + window.location.pathname,
+        redirectTo: getRedirectTo(),
       },
     });
 
