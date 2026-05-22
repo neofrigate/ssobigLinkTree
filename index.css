@@ -1,192 +1,227 @@
 @font-face {
-  font-family: 'Pretendard';
-  src: url('./fonts/Pretendard-Regular.woff2') format('woff2'),
-       url('./fonts/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
+  font-family: "Pretendard";
+  src: url("./fonts/Pretendard-Regular.woff2") format("woff2"),
+    url("./fonts/Pretendard-Regular.woff") format("woff");
   font-style: normal;
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('./fonts/Pretendard-Bold.woff2') format('woff2'),
-       url('./fonts/Pretendard-Bold.woff') format('woff');
-  font-weight: 700;
+  font-family: "Pretendard";
+  src: url("./fonts/Pretendard-Bold.woff2") format("woff2"),
+    url("./fonts/Pretendard-Bold.woff") format("woff");
   font-style: normal;
+  font-weight: 700;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #111111;
+  --panel: #1a1a1a;
+  --panel-hover: #202020;
+  --panel-border: rgba(255, 255, 255, 0.14);
+  --text-main: #f3f3f3;
+  --text-sub: rgba(243, 243, 243, 0.62);
+  --text-muted: rgba(243, 243, 243, 0.42);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
 }
 
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  margin: 0;
-}
-.top_gap {
-  height: 8vh;
-}
-.icon {
-  display: block;
-  border-radius: 50%; /* 완전한 원 형태 */
-  width: 100px; /* 원의 크기를 키움 */
-  height: 100px;
-  box-sizing: border-box;
-  background-color: black;
-  margin: 0 auto; /* 수평 중앙 정렬 */
-  overflow: hidden; /* 원 밖의 내용 잘림 */
-  position: relative;
-}
-.icon img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80%; /* 로고 크기를 원 크기 기준으로 조정 */
-  height: 80%;
-  transform: translate(-50%, -50%); /* 로고를 원 중심에 위치 */
-  object-fit: contain; /* 원 내부에 로고가 비율을 유지하며 들어감 */
-}
-.ssobig {
-  align-self: stretch;
-  position: relative;
-  line-height: 130%;
-}
-.b {
-  align-self: stretch;
-  position: relative;
-  font-size: 16px;
-  line-height: 130%;
-}
-.ssobig-parent {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 4px;
-}
-.parent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px; /* 로고와 텍스트 사이의 간격 조정 */
-  text-align: center;
-}
-.httpsaboutssobigcom {
-  align-self: stretch;
-  position: relative;
-  font-size: 14px;
-  line-height: 130%;
-  color: #ccc;
-}
-.div1 {
-  align-self: stretch;
-  border-radius: 8px;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 12px 20px;
-  gap: 4px;
-  text-decoration: none;
-  color: #fff;
-}
-.httpsaboutssobigcom1 {
-  align-self: stretch;
-  position: relative;
-  font-size: 14px;
-  line-height: 130%;
-  color: #333;
-  text-decoration: none;
-}
-.div2 {
-  align-self: stretch;
-  border-radius: 8px;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 12px 20px;
-  gap: 4px;
-  text-decoration: none;
-  color: #111;
-}
-.icon1 {
-  width: 19px;
-  position: relative;
-  height: 18px;
-}
-.love-buddies {
-  position: relative;
-  line-height: 130%;
-}
-.variant3 {
-  align-self: stretch;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 8px 20px;
-  gap: 8px;
-  text-decoration: none;
-  color: #fff;
-}
-.variant3-parent {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 12px 0px;
-  font-size: 14px;
-}
-.group {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 12px;
-  font-size: 16px;
-  color: #f7f7f7;
-}
-.frame-parent {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  max-width: 450px;
-}
-.div {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  text-align: center;
-  font-size: 24px;
-  color: #fff;
-  font-family: Pretendard;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #171717 0%, var(--bg) 100%);
+  color: var(--text-main);
 }
 
-.background-layer {
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.member-entry {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("linktree.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  filter: brightness(50%);
-  z-index: -1; /* Position background behind content */
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(17, 17, 17, 0.9);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.member-entry:hover,
+.member-entry:focus-visible {
+  background: #1d1d1d;
+  border-color: rgba(255, 255, 255, 0.34);
+  transform: translateY(-1px);
+}
+
+.member-entry:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+.page {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 24px 20px 36px;
+}
+
+.hero {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 12px 0 20px;
+  text-align: center;
+}
+
+.hero__logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #0b0b0b;
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.hero__copy {
+  display: grid;
+  gap: 6px;
+  max-width: 420px;
+}
+
+.hero__eyebrow {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hero__title {
+  margin: 0;
+  font-size: clamp(28px, 6.5vw, 38px);
+  line-height: 1.08;
+}
+
+.hero__description {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.links {
+  display: grid;
+  gap: 10px;
+}
+
+.link-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 18px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.link-card:hover,
+.link-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: var(--panel-hover);
+}
+
+.link-card:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+.link-card__body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.link-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.link-card__url {
+  min-width: 0;
+  color: var(--text-sub);
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.link-card__action {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .member-entry {
+    top: 12px;
+    right: 12px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .page {
+    padding: 20px 16px 32px;
+  }
+
+  .hero {
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .hero__logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .link-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .link-card__title {
+    font-size: 16px;
+  }
+
+  .link-card__url {
+    font-size: 13px;
+  }
+
+  .link-card__action {
+    font-size: 11px;
+  }
 }
