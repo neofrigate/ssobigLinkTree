@@ -14,95 +14,137 @@
           title: "쏘빅 홈페이지",
           repo: "https://github.com/neofrigate/ssobig-home",
           service: "https://www.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s3.png",
+          preview: "./assets/member-links/previews/s3.jpg",
         },
         {
           code: "s4",
           title: "쏘빅 데이터 스크래핑",
           repo: "https://github.com/neofrigate/ssobig-marketing",
           service: "https://relay.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s4.png",
+          preview: "./assets/member-links/previews/s4.jpg",
         },
         {
           code: "s5",
           title: "쏘빅 오프라인 관리",
           repo: "https://github.com/neofrigate/ssobig_appscript",
           service: "https://manage.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s5.svg",
+          preview: "./assets/member-links/previews/s5.jpg",
         },
         {
           code: "s6",
           title: "쏘빅 스토리 관리",
           repo: "https://github.com/soopeach22/ssobig-story",
           service: "https://manage-story.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s6.svg",
+          preview: "./assets/member-links/previews/s6.jpg",
         },
         {
           code: "s10",
           title: "쏘빅 파이낸스",
           repo: "https://github.com/neofrigate/ssobig-finance",
           service: "https://finance.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s10.svg",
+          preview: "./assets/member-links/previews/s10.jpg",
         },
         {
           code: "movie",
           title: "쏘빅 무비 제너레이터",
           repo: "https://github.com/neofrigate/ssobig-movie-generator",
           service: "https://github.com/neofrigate/ssobig-movie-generator",
+          favicon: "./assets/member-links/favicons/movie.ico",
+          preview: "",
         },
         {
           code: "writer",
           title: "쏘빅 라이터",
           repo: "https://github.com/neofrigate/writer-ssobig",
           service: "https://writer.ssobig.com/",
+          favicon: "./assets/member-links/favicons/writer.svg",
+          preview: "./assets/member-links/previews/writer.jpg",
         },
         {
           code: "preview",
           title: "쏘빅 미니게임 (프리뷰)",
           repo: "https://github.com/as-surin/ssobig-preview",
           service: "https://preview.ssobig.com/",
+          favicon: "./assets/member-links/favicons/preview.ico",
+          preview: "./assets/member-links/previews/preview.jpg",
         },
         {
           code: "rank",
           title: "머미랭크",
           repo: "https://github.com/neofrigate/murder-mystery-rank",
           service: "https://mmrank.app/",
+          favicon: "./assets/member-links/favicons/rank.png",
+          preview: "./assets/member-links/previews/rank.jpg",
         },
         {
           code: "docs",
           title: "쏘빅 문서 (Docs)",
           repo: "https://github.com/neofrigate/ssobig-docs",
           service: "https://docs.ssobig.com/",
+          favicon: "",
+          preview: "./assets/member-links/previews/docs.jpg",
         },
         {
           code: "office",
           title: "쏘빅 오피스",
           repo: "https://github.com/as-surin/ssobig-office",
           service: "https://ssobig-office.vercel.app/",
+          favicon: "",
+          preview: "./assets/member-links/previews/office.jpg",
         },
       ];
 
+      function displayUrl(url) {
+        const { hostname, pathname } = new URL(url);
+        return (hostname.replace(/^www\./, "") + pathname).replace(/\/$/, "");
+      }
+
+      function renderIcon(project) {
+        const initial = project.title.replace(/^쏘빅\s*/, "").charAt(0);
+        // 파비콘이 없거나 불러오지 못하면 이름 첫 글자로 대신한다.
+        const fallback = `<span class="project-card__initial">${initial}</span>`;
+        if (!project.favicon) return fallback;
+        return `<img src="${project.favicon}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-fallback')" />${fallback}`;
+      }
+
+      function renderPreview(project) {
+        if (project.preview) {
+          return `<img src="${project.preview}" alt="${project.title} 미리보기" loading="lazy" />`;
+        }
+        return `<span class="project-card__placeholder"><span class="project-card__favicon project-card__favicon--large">${renderIcon(project)}</span></span>`;
+      }
+
       function renderProjects() {
         const list = document.getElementById("projectList");
-        list.innerHTML = PROJECTS.map(
-          (project) => `
+        list.innerHTML = PROJECTS.map((project) => {
+          const hasService = project.service !== project.repo;
+          return `
             <article class="project-card">
-              <div class="project-card__meta">
-                <div class="project-card__code">${project.code}</div>
-                <div class="project-card__title">${project.title}</div>
-                <div class="project-card__info">
-                  <div class="project-card__line">
-                    <span class="project-card__label">GitHub</span>
-                    <span class="project-card__value">${project.repo}</span>
+              <a class="project-card__preview" href="${project.service}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
+                ${renderPreview(project)}
+              </a>
+              <div class="project-card__body">
+                <div class="project-card__head">
+                  <span class="project-card__favicon">${renderIcon(project)}</span>
+                  <div class="project-card__meta">
+                    <div class="project-card__title">${project.title}</div>
+                    <div class="project-card__url">${displayUrl(project.service)}</div>
                   </div>
-                  <div class="project-card__line">
-                    <span class="project-card__label">Service</span>
-                    <span class="project-card__value">${project.service}</span>
-                  </div>
+                  <span class="project-card__code">${project.code}</span>
+                </div>
+                <div class="project-card__actions">
+                  ${hasService ? `<a class="project-card__link project-card__link--primary" href="${project.service}" target="_blank" rel="noreferrer">Open</a>` : ""}
+                  <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
                 </div>
               </div>
-              <div class="project-card__actions">
-                <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
-                <a class="project-card__link" href="${project.service}" target="_blank" rel="noreferrer">Open</a>
-              </div>
             </article>
-          `
-        ).join("");
+          `;
+        }).join("");
       }
 
       function showLogin() {
