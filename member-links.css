@@ -285,10 +285,11 @@ button {
   gap: 10px;
 }
 
-/* 한 줄에 하나씩: 미리보기 | 사이트 정보 | 버튼 */
+/* 한 줄에 하나씩: 미리보기 | 사이트 정보. 카드 전체가 서비스 링크다. */
 .project-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) auto;
+  grid-template-columns: 200px minmax(0, 1fr);
   gap: 18px;
   align-items: center;
   padding: 12px;
@@ -301,7 +302,12 @@ button {
 
 .project-card:hover {
   background: var(--panel-hover);
-  border-color: var(--control-border);
+  border-color: var(--control-border-hover);
+}
+
+.project-card:has(.project-card__title:focus-visible) {
+  outline: 2px solid var(--text-main);
+  outline-offset: 2px;
 }
 
 .project-card__preview {
@@ -399,12 +405,25 @@ button {
 }
 
 .project-card__title {
+  display: block;
   overflow: hidden;
   font-size: 17px;
   font-weight: 700;
   line-height: 1.35;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.project-card__title:focus-visible {
+  outline: none;
+}
+
+/* 제목 링크를 카드 전체로 넓힌다. */
+.project-card__title::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  content: "";
 }
 
 .project-card__description {
@@ -418,40 +437,24 @@ button {
   -webkit-line-clamp: 2;
 }
 
-.project-card__actions {
-  display: grid;
-  gap: 8px;
-  padding-right: 4px;
+.project-card__repo {
+  position: relative;
+  z-index: 1;
+  justify-self: start;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.project-card__link {
-  min-width: 92px;
-  padding: 9px 12px;
-  border: 1px solid var(--control-border);
-  border-radius: 8px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 700;
-  transition: background 160ms ease, border-color 160ms ease;
-}
-
-.project-card__link:hover,
-.project-card__link:focus-visible {
-  background: var(--control-hover);
-  border-color: var(--control-border-hover);
+.project-card__repo:hover,
+.project-card__repo:focus-visible {
+  color: var(--text-main);
+  text-decoration: underline;
   outline: none;
-}
-
-.project-card__link--primary {
-  border-color: var(--primary);
-  background: var(--primary);
-  color: var(--primary-text);
-}
-
-.project-card__link--primary:hover,
-.project-card__link--primary:focus-visible {
-  border-color: var(--primary-hover);
-  background: var(--primary-hover);
 }
 
 @media (max-width: 720px) {
@@ -469,20 +472,10 @@ button {
     flex-direction: column;
   }
 
-  /* 좁은 화면: 미리보기와 정보는 옆으로, 버튼은 아래 한 줄로 */
   .project-card {
     grid-template-columns: 120px minmax(0, 1fr);
-    gap: 12px 14px;
-  }
-
-  .project-card__actions {
-    display: flex;
-    grid-column: 1 / -1;
-    padding-right: 0;
-  }
-
-  .project-card__link {
-    flex: 1;
+    gap: 14px;
+    align-items: start;
   }
 }
 
