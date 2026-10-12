@@ -138,7 +138,8 @@
         if (project.preview) {
           return `<img src="${project.preview}" alt="${project.title} 미리보기" loading="lazy" />`;
         }
-        return `<span class="project-card__placeholder"><span class="project-card__favicon project-card__favicon--large">${renderIcon(project)}</span></span>`;
+        // og:image가 없는 사이트는 링크 공유 때도 이미지가 안 보이므로 그대로 알려준다.
+        return `<span class="project-card__empty">미리보기 없음</span>`;
       }
 
       const GROUPS = [
@@ -153,20 +154,18 @@
             <a class="project-card__preview" href="${project.service}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
               ${renderPreview(project)}
             </a>
-            <div class="project-card__body">
-              <div class="project-card__text">
-                <div class="project-card__site">
-                  <span class="project-card__favicon">${renderIcon(project)}</span>
-                  <span class="project-card__url">${displayUrl(project.service)}</span>
-                  <span class="project-card__code">${project.code}</span>
-                </div>
-                <div class="project-card__title">${project.title}</div>
-                ${project.description ? `<p class="project-card__description">${project.description}</p>` : ""}
+            <div class="project-card__text">
+              <div class="project-card__site">
+                <span class="project-card__favicon">${renderIcon(project)}</span>
+                <span class="project-card__url">${displayUrl(project.service)}</span>
+                <span class="project-card__code">${project.code}</span>
               </div>
-              <div class="project-card__actions">
-                ${hasService ? `<a class="project-card__link project-card__link--primary" href="${project.service}" target="_blank" rel="noreferrer">Open</a>` : ""}
-                <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
-              </div>
+              <div class="project-card__title">${project.title}</div>
+              ${project.description ? `<p class="project-card__description">${project.description}</p>` : ""}
+            </div>
+            <div class="project-card__actions">
+              ${hasService ? `<a class="project-card__link project-card__link--primary" href="${project.service}" target="_blank" rel="noreferrer">Open</a>` : ""}
+              <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
         `;
