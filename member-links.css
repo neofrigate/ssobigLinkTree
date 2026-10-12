@@ -167,6 +167,38 @@ button {
   display: none;
 }
 
+.project-groups {
+  display: grid;
+  gap: 40px;
+}
+
+.project-group__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: 16px;
+}
+
+.project-group__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.project-group__count {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.project-group__description {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
 .project-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
@@ -192,7 +224,7 @@ button {
 
 .project-card__preview {
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1200 / 630;
   overflow: hidden;
   border-bottom: 1px solid var(--panel-border);
   background: #0c0c0c;
@@ -228,28 +260,34 @@ button {
   padding: 14px 16px 16px;
 }
 
-.project-card__head {
+.project-card__text {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 10px;
+  gap: 6px;
+  min-width: 0;
+}
+
+.project-card__site {
+  display: flex;
+  gap: 8px;
   align-items: center;
+  min-width: 0;
 }
 
 .project-card__favicon {
   display: flex;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   flex: none;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 5px;
   background: #f3f3f3;
 }
 
 .project-card__favicon img {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   object-fit: contain;
 }
 
@@ -267,7 +305,7 @@ button {
 .project-card__initial {
   display: none;
   color: #111111;
-  font-size: 15px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -284,12 +322,6 @@ button {
   display: none;
 }
 
-.project-card__meta {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
 .project-card__title {
   overflow: hidden;
   font-size: 16px;
@@ -300,6 +332,8 @@ button {
 }
 
 .project-card__url {
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   color: var(--text-sub);
   font-size: 13px;
@@ -308,8 +342,19 @@ button {
   white-space: nowrap;
 }
 
+.project-card__description {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-sub);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .project-card__code {
-  align-self: start;
+  flex: none;
   padding: 3px 7px;
   border: 1px solid var(--panel-border);
   border-radius: 999px;

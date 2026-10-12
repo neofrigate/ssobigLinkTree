@@ -11,91 +11,113 @@
       const PROJECTS = [
         {
           code: "s3",
+          group: "external",
           title: "쏘빅 홈페이지",
+          description: "술 없이도 즐거운 소셜 플랫폼 쏘빅! 머더미스터리, 추리게임, 보드게임, 소셜링 등 다양한 콘텐츠를 만나보세요.",
           repo: "https://github.com/neofrigate/ssobig-home",
           service: "https://www.ssobig.com/",
           favicon: "./assets/member-links/favicons/s3.png",
-          preview: "./assets/member-links/previews/s3.jpg",
-        },
-        {
-          code: "s4",
-          title: "쏘빅 데이터 스크래핑",
-          repo: "https://github.com/neofrigate/ssobig-marketing",
-          service: "https://relay.ssobig.com/",
-          favicon: "./assets/member-links/favicons/s4.png",
-          preview: "./assets/member-links/previews/s4.jpg",
-        },
-        {
-          code: "s5",
-          title: "쏘빅 오프라인 관리",
-          repo: "https://github.com/neofrigate/ssobig_appscript",
-          service: "https://manage.ssobig.com/",
-          favicon: "./assets/member-links/favicons/s5.svg",
-          preview: "./assets/member-links/previews/s5.jpg",
-        },
-        {
-          code: "s6",
-          title: "쏘빅 스토리 관리",
-          repo: "https://github.com/soopeach22/ssobig-story",
-          service: "https://manage-story.ssobig.com/",
-          favicon: "./assets/member-links/favicons/s6.svg",
-          preview: "./assets/member-links/previews/s6.jpg",
-        },
-        {
-          code: "s10",
-          title: "쏘빅 파이낸스",
-          repo: "https://github.com/neofrigate/ssobig-finance",
-          service: "https://finance.ssobig.com/",
-          favicon: "./assets/member-links/favicons/s10.svg",
-          preview: "./assets/member-links/previews/s10.jpg",
-        },
-        {
-          code: "movie",
-          title: "쏘빅 무비 제너레이터",
-          repo: "https://github.com/neofrigate/ssobig-movie-generator",
-          service: "https://github.com/neofrigate/ssobig-movie-generator",
-          favicon: "./assets/member-links/favicons/movie.ico",
           preview: "",
         },
         {
-          code: "writer",
-          title: "쏘빅 라이터",
-          repo: "https://github.com/neofrigate/writer-ssobig",
-          service: "https://writer.ssobig.com/",
-          favicon: "./assets/member-links/favicons/writer.svg",
-          preview: "./assets/member-links/previews/writer.jpg",
-        },
-        {
-          code: "preview",
-          title: "쏘빅 미니게임 (프리뷰)",
-          repo: "https://github.com/as-surin/ssobig-preview",
-          service: "https://preview.ssobig.com/",
-          favicon: "./assets/member-links/favicons/preview.ico",
-          preview: "./assets/member-links/previews/preview.jpg",
-        },
-        {
           code: "rank",
+          group: "external",
           title: "머미랭크",
+          description: "머미랭크는 머더 미스터리(머미) 티어표·랭킹 사이트예요. 해본 머미를 S~F로 평가해 나만의 티어표를 만들고, 인원별 추천작과 평점·후기, 취향이 비슷한 사람을 찾아보세요.",
           repo: "https://github.com/neofrigate/murder-mystery-rank",
           service: "https://mmrank.app/",
           favicon: "./assets/member-links/favicons/rank.png",
           preview: "./assets/member-links/previews/rank.jpg",
         },
         {
+          code: "preview",
+          group: "external",
+          title: "쏘빅 미니게임 (프리뷰)",
+          description: "SsoBig mini game campaign site.",
+          repo: "https://github.com/as-surin/ssobig-preview",
+          service: "https://preview.ssobig.com/",
+          favicon: "./assets/member-links/favicons/preview.ico",
+          preview: "",
+        },
+        {
+          code: "writer",
+          group: "external",
+          title: "쏘빅 라이터",
+          description: "미스터리 스토리 게임 제작 도구",
+          repo: "https://github.com/neofrigate/writer-ssobig",
+          service: "https://writer.ssobig.com/",
+          favicon: "./assets/member-links/favicons/writer.svg",
+          preview: "",
+        },
+        {
+          code: "s4",
+          group: "internal",
+          title: "쏘빅 데이터 스크래핑",
+          description: "",
+          repo: "https://github.com/neofrigate/ssobig-marketing",
+          service: "https://relay.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s4.png",
+          preview: "",
+        },
+        {
+          code: "s5",
+          group: "internal",
+          title: "쏘빅 오프라인 관리",
+          description: "",
+          repo: "https://github.com/neofrigate/ssobig_appscript",
+          service: "https://manage.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s5.svg",
+          preview: "",
+        },
+        {
+          code: "s6",
+          group: "internal",
+          title: "쏘빅 스토리 관리",
+          description: "",
+          repo: "https://github.com/soopeach22/ssobig-story",
+          service: "https://manage-story.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s6.svg",
+          preview: "",
+        },
+        {
+          code: "s10",
+          group: "internal",
+          title: "쏘빅 파이낸스",
+          description: "",
+          repo: "https://github.com/neofrigate/ssobig-finance",
+          service: "https://finance.ssobig.com/",
+          favicon: "./assets/member-links/favicons/s10.svg",
+          preview: "",
+        },
+        {
           code: "docs",
+          group: "internal",
           title: "쏘빅 문서 (Docs)",
+          description: "쏘빅의 지식과 기록을 함께 나누는 공간",
           repo: "https://github.com/neofrigate/ssobig-docs",
           service: "https://docs.ssobig.com/",
           favicon: "",
-          preview: "./assets/member-links/previews/docs.jpg",
+          preview: "",
         },
         {
           code: "office",
+          group: "internal",
           title: "쏘빅 오피스",
+          description: "SSOBIG의 사람과 문서를 연결하는 사내 업무 공간",
           repo: "https://github.com/as-surin/ssobig-office",
           service: "https://ssobig-office.vercel.app/",
           favicon: "",
           preview: "./assets/member-links/previews/office.jpg",
+        },
+        {
+          code: "movie",
+          group: "internal",
+          title: "쏘빅 무비 제너레이터",
+          description: "",
+          repo: "https://github.com/neofrigate/ssobig-movie-generator",
+          service: "https://github.com/neofrigate/ssobig-movie-generator",
+          favicon: "./assets/member-links/favicons/movie.ico",
+          preview: "",
         },
       ];
 
@@ -119,30 +141,50 @@
         return `<span class="project-card__placeholder"><span class="project-card__favicon project-card__favicon--large">${renderIcon(project)}</span></span>`;
       }
 
-      function renderProjects() {
-        const list = document.getElementById("projectList");
-        list.innerHTML = PROJECTS.map((project) => {
-          const hasService = project.service !== project.repo;
-          return `
-            <article class="project-card">
-              <a class="project-card__preview" href="${project.service}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
-                ${renderPreview(project)}
-              </a>
-              <div class="project-card__body">
-                <div class="project-card__head">
+      const GROUPS = [
+        { key: "external", title: "외부용", description: "고객과 작가가 쓰는 공개 서비스" },
+        { key: "internal", title: "내부용", description: "쏘빅 멤버만 쓰는 운영·관리 도구" },
+      ];
+
+      function renderCard(project) {
+        const hasService = project.service !== project.repo;
+        return `
+          <article class="project-card">
+            <a class="project-card__preview" href="${project.service}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
+              ${renderPreview(project)}
+            </a>
+            <div class="project-card__body">
+              <div class="project-card__text">
+                <div class="project-card__site">
                   <span class="project-card__favicon">${renderIcon(project)}</span>
-                  <div class="project-card__meta">
-                    <div class="project-card__title">${project.title}</div>
-                    <div class="project-card__url">${displayUrl(project.service)}</div>
-                  </div>
+                  <span class="project-card__url">${displayUrl(project.service)}</span>
                   <span class="project-card__code">${project.code}</span>
                 </div>
-                <div class="project-card__actions">
-                  ${hasService ? `<a class="project-card__link project-card__link--primary" href="${project.service}" target="_blank" rel="noreferrer">Open</a>` : ""}
-                  <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
-                </div>
+                <div class="project-card__title">${project.title}</div>
+                ${project.description ? `<p class="project-card__description">${project.description}</p>` : ""}
               </div>
-            </article>
+              <div class="project-card__actions">
+                ${hasService ? `<a class="project-card__link project-card__link--primary" href="${project.service}" target="_blank" rel="noreferrer">Open</a>` : ""}
+                <a class="project-card__link" href="${project.repo}" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      function renderProjects() {
+        const container = document.getElementById("projectGroups");
+        container.innerHTML = GROUPS.map((group) => {
+          const projects = PROJECTS.filter((project) => project.group === group.key);
+          return `
+            <section class="project-group" aria-labelledby="group-${group.key}">
+              <div class="project-group__head">
+                <h2 id="group-${group.key}" class="project-group__title">${group.title}</h2>
+                <span class="project-group__count">${projects.length}</span>
+                <p class="project-group__description">${group.description}</p>
+              </div>
+              <div class="project-list">${projects.map(renderCard).join("")}</div>
+            </section>
           `;
         }).join("");
       }
@@ -230,7 +272,7 @@
           <button class="topbar__logout" onclick="window.SsobigAuth.signOut()">로그아웃</button>
         </div>
 
-        <section id="projectList" class="project-list" aria-label="멤버 전용 프로젝트 링크"></section>
+        <div id="projectGroups" class="project-groups"></div>
       </main>
     </div>
   </body>
