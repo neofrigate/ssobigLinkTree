@@ -31,7 +31,6 @@
   --primary: #161616;
   --primary-hover: #000000;
   --primary-text: #ffffff;
-  --tile: #f1f1ef;
   --thumb: #f1f1ef;
   --shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
@@ -52,7 +51,6 @@
     --primary: #f3f3f3;
     --primary-hover: #ffffff;
     --primary-text: #111111;
-    --tile: #f3f3f3;
     --thumb: #121212;
     --shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   }
@@ -342,13 +340,14 @@ button {
   min-width: 0;
 }
 
-.project-card__site {
+.project-card__head {
   display: flex;
   gap: 8px;
   align-items: center;
   min-width: 0;
 }
 
+/* 테두리·배경 없이 파비콘만 둔다. */
 .project-card__favicon {
   display: flex;
   width: 20px;
@@ -356,22 +355,29 @@ button {
   flex: none;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 5px;
-  background: var(--tile);
 }
 
 .project-card__favicon img {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
+}
+
+/* 다크 모드에서는 검은 파비콘이 배경에 묻히므로 밝기만 뒤집는다(색상은 hue-rotate로 유지).
+   흰 배경이 박힌 파비콘은 뒤집으면 검은 사각형이 되므로 screen으로 카드 배경에 섞는다. */
+@media (prefers-color-scheme: dark) {
+  .project-card__favicon img {
+    filter: invert(1) hue-rotate(180deg);
+    mix-blend-mode: screen;
+  }
 }
 
 .project-card__initial {
   display: none;
-  color: #111111;
-  font-size: 11px;
+  color: var(--text-sub);
+  font-size: 15px;
   font-weight: 700;
+  line-height: 1;
 }
 
 .project-card__favicon > .project-card__initial:only-child,
@@ -383,18 +389,9 @@ button {
   display: none;
 }
 
-.project-card__url {
-  min-width: 0;
-  overflow: hidden;
-  color: var(--text-sub);
-  font-size: 13px;
-  line-height: 1.4;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .project-card__code {
   flex: none;
+  margin-left: auto;
   padding: 2px 7px;
   border: 1px solid var(--panel-border);
   border-radius: 999px;
@@ -406,11 +403,72 @@ button {
 
 .project-card__title {
   display: block;
+  min-width: 0;
   overflow: hidden;
   font-size: 17px;
   font-weight: 700;
   line-height: 1.35;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 카드 링크 위에 올려 따로 눌리게 한다. */
+.project-card__copy {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.project-card__copy:hover,
+.project-card__copy:focus-visible {
+  background: var(--control-hover);
+  color: var(--text-main);
+  outline: none;
+}
+
+.project-card__copy:focus-visible {
+  box-shadow: 0 0 0 2px var(--text-main);
+}
+
+.project-card__copy svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-card__copy .icon-check,
+.project-card__copy.is-copied .icon-copy {
+  display: none;
+}
+
+.project-card__copy.is-copied {
+  color: var(--text-main);
+}
+
+.project-card__copy.is-copied .icon-check {
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   white-space: nowrap;
 }
 

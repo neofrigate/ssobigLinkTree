@@ -177,17 +177,51 @@
           <article class="project-card">
             <div class="project-card__preview">${renderPreview(project)}</div>
             <div class="project-card__text">
-              <div class="project-card__site">
+              <div class="project-card__head">
                 <span class="project-card__favicon">${renderIcon(project)}</span>
-                <span class="project-card__url">${displayUrl(project.service)}</span>
+                <a class="project-card__title" href="${project.service}" target="_blank" rel="noreferrer">${project.title}</a>
+                <button class="project-card__copy" type="button" data-url="${project.service}" aria-label="${project.title} 주소 복사" title="주소 복사">
+                  <svg class="icon-copy" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" /><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4a1.5 1.5 0 0 0-1.5 1.5v5A1.5 1.5 0 0 0 4 9.5h.5" /></svg>
+                  <svg class="icon-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" /></svg>
+                </button>
                 <span class="project-card__code">${project.code}</span>
               </div>
-              <a class="project-card__title" href="${project.service}" target="_blank" rel="noreferrer">${project.title}</a>
               ${project.description ? `<p class="project-card__description">${project.description}</p>` : ""}
               ${showRepo ? `<a class="project-card__repo" href="${project.repo}" target="_blank" rel="noreferrer">GitHub · ${displayUrl(project.repo)}</a>` : ""}
             </div>
           </article>
         `;
+      }
+
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch {
+          // 클립보드 API를 못 쓰는 환경(권한 거부 등)에서는 예전 방식으로 복사한다.
+          const field = document.createElement("textarea");
+          field.value = text;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          const copied = document.execCommand("copy");
+          field.remove();
+          return copied;
+        }
+      }
+
+      async function handleCopy(button) {
+        const copied = await copyText(button.dataset.url);
+        button.classList.toggle("is-copied", copied);
+        button.title = copied ? "복사됨" : "복사하지 못했습니다";
+        document.getElementById("copyStatus").textContent = copied ? "주소를 복사했습니다." : "주소를 복사하지 못했습니다.";
+        clearTimeout(button.resetTimer);
+        button.resetTimer = setTimeout(() => {
+          button.classList.remove("is-copied");
+          button.title = "주소 복사";
+        }, 1600);
       }
 
       const BUSINESSES = [
@@ -256,6 +290,11 @@
             </div>
           `
         ).join("");
+
+        document.getElementById("businessPanels").addEventListener("click", (event) => {
+          const button = event.target.closest(".project-card__copy");
+          if (button) handleCopy(button);
+        });
 
         tabs.addEventListener("click", (event) => {
           const tab = event.target.closest(".business-tab");
@@ -360,6 +399,7 @@
 
         <div id="businessTabs" class="business-tabs" role="tablist" aria-label="비즈니스"></div>
         <div id="businessPanels"></div>
+        <p id="copyStatus" class="visually-hidden" role="status" aria-live="polite"></p>
       </main>
     </div>
   </body>
