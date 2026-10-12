@@ -11,6 +11,7 @@
       const PROJECTS = [
         {
           code: "s3",
+          business: "hq",
           group: "external",
           title: "쏘빅 홈페이지",
           description: "술 없이도 즐거운 소셜 플랫폼 쏘빅! 머더미스터리, 추리게임, 보드게임, 소셜링 등 다양한 콘텐츠를 만나보세요.",
@@ -21,6 +22,7 @@
         },
         {
           code: "rank",
+          business: "tool",
           group: "external",
           title: "머미랭크",
           description: "머미랭크는 머더 미스터리(머미) 티어표·랭킹 사이트예요. 해본 머미를 S~F로 평가해 나만의 티어표를 만들고, 인원별 추천작과 평점·후기, 취향이 비슷한 사람을 찾아보세요.",
@@ -31,6 +33,7 @@
         },
         {
           code: "preview",
+          business: "tool",
           group: "external",
           title: "쏘빅 미니게임 (프리뷰)",
           description: "SsoBig mini game campaign site.",
@@ -41,6 +44,7 @@
         },
         {
           code: "writer",
+          business: "tool",
           group: "external",
           title: "쏘빅 라이터",
           description: "미스터리 스토리 게임 제작 도구",
@@ -51,6 +55,7 @@
         },
         {
           code: "s4",
+          business: "hq",
           group: "internal",
           title: "쏘빅 데이터 스크래핑",
           description: "",
@@ -61,6 +66,7 @@
         },
         {
           code: "s5",
+          business: "offline",
           group: "internal",
           title: "쏘빅 오프라인 관리",
           description: "",
@@ -71,6 +77,7 @@
         },
         {
           code: "s6",
+          business: "tool",
           group: "internal",
           title: "쏘빅 스토리 관리",
           description: "",
@@ -81,6 +88,7 @@
         },
         {
           code: "s10",
+          business: "hq",
           group: "internal",
           title: "쏘빅 파이낸스",
           description: "",
@@ -91,6 +99,7 @@
         },
         {
           code: "docs",
+          business: "hq",
           group: "internal",
           title: "쏘빅 문서 (Docs)",
           description: "쏘빅의 지식과 기록을 함께 나누는 공간",
@@ -101,6 +110,7 @@
         },
         {
           code: "office",
+          business: "hq",
           group: "internal",
           title: "쏘빅 오피스",
           description: "SSOBIG의 사람과 문서를 연결하는 사내 업무 공간",
@@ -111,6 +121,7 @@
         },
         {
           code: "movie",
+          business: "hq",
           group: "internal",
           title: "쏘빅 무비 제너레이터",
           description: "",
@@ -171,14 +182,31 @@
         `;
       }
 
-      function renderProjects() {
-        const container = document.getElementById("projectGroups");
-        container.innerHTML = GROUPS.map((group) => {
-          const projects = PROJECTS.filter((project) => project.group === group.key);
+      const BUSINESSES = [
+        { key: "hq", title: "본사" },
+        { key: "offline", title: "오프라인" },
+        { key: "tool", title: "쏘빅툴" },
+      ];
+      // Supabase 로그인이 주소의 #를 쓰므로, 선택한 탭은 브라우저 저장소에만 기억한다.
+      const TAB_STORAGE_KEY = "member-links:business";
+
+      function readSavedTab() {
+        try {
+          const saved = localStorage.getItem(TAB_STORAGE_KEY);
+          return BUSINESSES.some((business) => business.key === saved) ? saved : BUSINESSES[0].key;
+        } catch {
+          return BUSINESSES[0].key;
+        }
+      }
+
+      function renderGroups(businessKey) {
+        return GROUPS.map((group) => {
+          const projects = PROJECTS.filter((project) => project.business === businessKey && project.group === group.key);
+          if (!projects.length) return "";
           return `
-            <section class="project-group" aria-labelledby="group-${group.key}">
+            <section class="project-group" aria-labelledby="group-${businessKey}-${group.key}">
               <div class="project-group__head">
-                <h2 id="group-${group.key}" class="project-group__title">${group.title}</h2>
+                <h2 id="group-${businessKey}-${group.key}" class="project-group__title">${group.title}</h2>
                 <span class="project-group__count">${projects.length}</span>
                 <p class="project-group__description">${group.description}</p>
               </div>
@@ -186,6 +214,57 @@
             </section>
           `;
         }).join("");
+      }
+
+      function selectTab(businessKey) {
+        document.querySelectorAll(".business-tab").forEach((tab) => {
+          const selected = tab.dataset.business === businessKey;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        document.querySelectorAll(".project-groups").forEach((panel) => {
+          panel.hidden = panel.dataset.business !== businessKey;
+        });
+        try {
+          localStorage.setItem(TAB_STORAGE_KEY, businessKey);
+        } catch {}
+      }
+
+      function renderProjects() {
+        const tabs = document.getElementById("businessTabs");
+        tabs.innerHTML = BUSINESSES.map((business) => {
+          const count = PROJECTS.filter((project) => project.business === business.key).length;
+          return `
+            <button class="business-tab" type="button" role="tab" id="tab-${business.key}" data-business="${business.key}" aria-controls="panel-${business.key}">
+              ${business.title}<span class="business-tab__count">${count}</span>
+            </button>
+          `;
+        }).join("");
+
+        document.getElementById("businessPanels").innerHTML = BUSINESSES.map(
+          (business) => `
+            <div class="project-groups" role="tabpanel" id="panel-${business.key}" data-business="${business.key}" aria-labelledby="tab-${business.key}">
+              ${renderGroups(business.key)}
+            </div>
+          `
+        ).join("");
+
+        tabs.addEventListener("click", (event) => {
+          const tab = event.target.closest(".business-tab");
+          if (tab) selectTab(tab.dataset.business);
+        });
+        // 좌우 화살표로 탭 이동
+        tabs.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+          const keys = BUSINESSES.map((business) => business.key);
+          const current = keys.indexOf(document.activeElement?.dataset.business);
+          if (current < 0) return;
+          const next = keys[(current + (event.key === "ArrowRight" ? 1 : -1) + keys.length) % keys.length];
+          selectTab(next);
+          document.getElementById(`tab-${next}`).focus();
+        });
+
+        selectTab(readSavedTab());
       }
 
       function showLogin() {
@@ -271,7 +350,8 @@
           <button class="topbar__logout" onclick="window.SsobigAuth.signOut()">로그아웃</button>
         </div>
 
-        <div id="projectGroups" class="project-groups"></div>
+        <div id="businessTabs" class="business-tabs" role="tablist" aria-label="비즈니스"></div>
+        <div id="businessPanels"></div>
       </main>
     </div>
   </body>

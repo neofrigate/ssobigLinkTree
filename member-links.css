@@ -200,9 +200,57 @@ button {
   display: none;
 }
 
+.business-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--panel-border);
+  overflow-x: auto;
+}
+
+.business-tab {
+  display: inline-flex;
+  flex: none;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: -1px;
+  padding: 12px 14px;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 16px;
+  font-weight: 700;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.business-tab:hover,
+.business-tab:focus-visible {
+  color: var(--text-main);
+  outline: none;
+}
+
+.business-tab:focus-visible {
+  border-radius: 6px 6px 0 0;
+  background: var(--control-hover);
+}
+
+.business-tab[aria-selected="true"] {
+  border-bottom-color: var(--text-main);
+  color: var(--text-main);
+}
+
+.business-tab__count {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
 .project-groups {
   display: grid;
   gap: 40px;
+}
+
+.project-groups[hidden] {
+  display: none;
 }
 
 .project-group__head {
