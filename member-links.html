@@ -176,9 +176,9 @@
         return `
           <article class="project-card">
             <div class="project-card__preview">${renderPreview(project)}</div>
+            <span class="project-card__favicon">${renderIcon(project)}</span>
             <div class="project-card__text">
               <div class="project-card__head">
-                <span class="project-card__favicon">${renderIcon(project)}</span>
                 <a class="project-card__title" href="${project.service}" target="_blank" rel="noreferrer">${project.title}</a>
                 <button class="project-card__copy" type="button" data-url="${project.service}" aria-label="${project.title} 주소 복사" title="주소 복사">
                   <svg class="icon-copy" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" /><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4a1.5 1.5 0 0 0-1.5 1.5v5A1.5 1.5 0 0 0 4 9.5h.5" /></svg>

@@ -287,7 +287,7 @@ button {
 .project-card {
   position: relative;
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: 200px 40px minmax(0, 1fr);
   gap: 18px;
   align-items: center;
   padding: 12px;
@@ -347,19 +347,19 @@ button {
   min-width: 0;
 }
 
-/* 테두리·배경 없이 파비콘만 둔다. */
+/* 테두리·배경 없이 미리보기 옆에 크게 둔다. */
 .project-card__favicon {
   display: flex;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   flex: none;
   align-items: center;
   justify-content: center;
 }
 
 .project-card__favicon img {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -375,7 +375,7 @@ button {
 .project-card__initial {
   display: none;
   color: var(--text-sub);
-  font-size: 15px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1;
 }
@@ -531,9 +531,19 @@ button {
   }
 
   .project-card {
-    grid-template-columns: 120px minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: 120px 32px minmax(0, 1fr);
+    gap: 12px;
     align-items: start;
+  }
+
+  .project-card__favicon,
+  .project-card__favicon img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .project-card__initial {
+    font-size: 22px;
   }
 }
 
