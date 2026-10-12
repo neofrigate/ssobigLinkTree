@@ -81,6 +81,9 @@ def save_favicon(code, base_url, head):
         [rank for kind, rank in order.items() if kind in icon[0] or icon[1].split("?")[0].endswith(kind)] or [2]
     ))
     urls = [urllib.parse.urljoin(base_url, href) for _, href in icons]
+    if urllib.parse.urlparse(base_url).hostname == "github.com":
+        # 비공개 저장소는 페이지를 못 읽고, github.com/favicon.ico는 32px라 크게 보면 흐리다.
+        urls.append("https://github.githubassets.com/favicons/favicon.svg")
     urls.append(urllib.parse.urljoin(base_url, "/favicon.ico"))
     for url in urls:
         try:
