@@ -225,6 +225,7 @@
       }
 
       const BUSINESSES = [
+        { key: "all", title: "전체" },
         { key: "hq", title: "본사" },
         { key: "offline", title: "오프라인" },
         { key: "tool", title: "쏘빅툴" },
@@ -241,9 +242,14 @@
         }
       }
 
+      // "전체" 탭은 모든 프로젝트를 한 번씩 보여준다.
+      function inBusiness(project, businessKey) {
+        return businessKey === "all" || project.businesses.includes(businessKey);
+      }
+
       function renderGroups(businessKey) {
         return GROUPS.map((group) => {
-          const projects = PROJECTS.filter((project) => project.businesses.includes(businessKey) && project.group === group.key);
+          const projects = PROJECTS.filter((project) => inBusiness(project, businessKey) && project.group === group.key);
           if (!projects.length) return "";
           return `
             <section class="project-group" aria-labelledby="group-${businessKey}-${group.key}">
@@ -275,7 +281,7 @@
       function renderProjects() {
         const tabs = document.getElementById("businessTabs");
         tabs.innerHTML = BUSINESSES.map((business) => {
-          const count = PROJECTS.filter((project) => project.businesses.includes(business.key)).length;
+          const count = PROJECTS.filter((project) => inBusiness(project, business.key)).length;
           return `
             <button class="business-tab" type="button" role="tab" id="tab-${business.key}" data-business="${business.key}" aria-controls="panel-${business.key}">
               ${business.title}<span class="business-tab__count">${count}</span>
